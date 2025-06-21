@@ -1,3 +1,7 @@
+/**
+ * Check if email is registered and if it's an admin
+ * Developed by Tejas and Sanju
+ */
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import User from "../models/User.model.js";
@@ -52,5 +56,34 @@ export const login = async (req, res) => {
     res.json({ token, user });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+};
+
+export const checkEmail = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    const therapist = await Therapist.findOne({ email });
+
+    if (user && user.isAdmin) {
+      return res.json({
+        exists: true,
+        role: "admin",
+        message: "Want to login as Admin?",
+      });
+    }
+
+    if (therapist) {
+      return res.json({ exists: true, role: "therapist" });
+    }
+
+    if (user) {
+      return res.json({ exists: true, role: "user" });
+    }
+
+    return res.json({ exists: false, message: "Email not found" });
+  } catch (err) {
+    return res.status(500).json({ error: "Server error" });
   }
 };

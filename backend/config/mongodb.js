@@ -1,8 +1,26 @@
 import mongoose from "mongoose";
 
 const connectDB = async () => {
-  mongoose.connection.on("connected", () => console.log(`Mongo connected`));
-  await mongoose.connect(`${process.env.MONGODB_URI}/prescripto`);
+  console.log("📡 Trying to connect to MongoDB...");
+
+  mongoose.connection.on("connected", () =>
+    console.log("✅ MongoDB connected")
+  );
+
+  mongoose.connection.on("error", (err) =>
+    console.error("❌ MongoDB connection error:", err)
+  );
+
+  mongoose.connection.on("disconnected", () =>
+    console.warn("⚠️ MongoDB disconnected")
+  );
+
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+  } catch (error) {
+    console.error("❌ Initial connection failed:", error.message);
+    process.exit(1);
+  }
 };
 
 export default connectDB;
