@@ -1,0 +1,27 @@
+### ✅ Create therapist (manual)
+POST http://localhost:3000/api/therapists
+Content-Type: application/json
+
+{
+  "name": "Dr. Sanju",
+  "email": "drsanju@example.com",
+  "phone": "9876543211",
+  "languages": ["Hindi", "English"],
+  "specializations": ["Anxiety", "Depression"],
+  "experienceYears": 5
+}
+
+### ✅ Get all therapists
+GET http://localhost:3000/api/therapists
+
+### ✅ Get therapist by ID
+GET http://localhost:3000/api/therapists/665defabcdefabcdefabcdef
+
+### ✅ Update therapist (requires auth)
+PUT http://localhost:3000/api/therapists/665defabcdefabcdefabcdef
+Authorization: Bearer <PASTE_JWT_HERE>
+Content-Type: application/json
+
+{
+  "experienceYears": 8
+}

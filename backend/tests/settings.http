@@ -1,0 +1,12 @@
+### ✅ Get setting by key
+GET http://localhost:3000/api/settings/session_price
+Authorization: Bearer <PASTE_ADMIN_JWT_HERE>
+
+### ✅ Update setting by key
+PUT http://localhost:3000/api/settings/session_price
+Authorization: Bearer <PASTE_ADMIN_JWT_HERE>
+Content-Type: application/json
+
+{
+  "value": 1200
+}

@@ -5,6 +5,7 @@
 import express from "express";
 import { signup, login } from "../controllers/auth.controller.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
+import { checkEmail } from '../controllers/auth.controller.js';
 
 const router = express.Router();
 
@@ -21,5 +22,9 @@ router.post("/login", login);
 router.get("/verify", authenticate, (req, res) => {
   res.json({ message: "Token is valid", user: req.user });
 });
+
+
+
+router.post('/check-email', checkEmail);
 
 export default router;

@@ -1,0 +1,24 @@
+### ✅ Create a new session
+POST http://localhost:3000/api/sessions
+Authorization: Bearer <PASTE_JWT_HERE>
+Content-Type: application/json
+
+{
+  "therapistId": "665defabcdefabcdefabcdef",
+  "patientId": "665abc123456789012345678",
+  "type": "therapy",
+  "scheduledAt": "2025-06-25T14:00:00Z"
+}
+
+### ✅ Get all sessions
+GET http://localhost:3000/api/sessions
+Authorization: Bearer <PASTE_JWT_HERE>
+
+### ✅ Update session status
+PUT http://localhost:3000/api/sessions/665session1234567890abcdef
+Authorization: Bearer <PASTE_JWT_HERE>
+Content-Type: application/json
+
+{
+  "status": "completed"
+}

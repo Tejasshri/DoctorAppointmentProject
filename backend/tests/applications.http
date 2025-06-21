@@ -1,0 +1,23 @@
+### ✅ Submit therapist application
+POST http://localhost:3000/api/applications
+Authorization: Bearer <PASTE_JWT_HERE>
+Content-Type: application/json
+
+{
+  "therapistId": "665defabcdefabcdefabcdef",
+  "bio": "I have 5 years of experience...",
+  "documents": ["degree.pdf", "certification.pdf"]
+}
+
+### ✅ Get pending applications (admin)
+GET http://localhost:3000/api/applications
+Authorization: Bearer <PASTE_ADMIN_JWT_HERE>
+
+### ✅ Update application status
+PUT http://localhost:3000/api/applications/665abcabcabcabcabcabcabc
+Authorization: Bearer <PASTE_ADMIN_JWT_HERE>
+Content-Type: application/json
+
+{
+  "status": "approved"
+}

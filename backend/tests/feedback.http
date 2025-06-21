@@ -1,0 +1,14 @@
+### ✅ Submit feedback after session
+POST http://localhost:3000/api/feedback
+Authorization: Bearer <PASTE_JWT_HERE>
+Content-Type: application/json
+
+{
+  "sessionId": "665session1234567890abcdef",
+  "rating": 5,
+  "comment": "The session was helpful and professional."
+}
+
+### ✅ Get feedback for a session
+GET http://localhost:3000/api/feedback/665session1234567890abcdef
+Authorization: Bearer <PASTE_JWT_HERE>
