@@ -1,0 +1,34 @@
+### ✅ Create a new admin (superadmin only)
+POST http://localhost:3000/api/admins
+Content-Type: application/json
+Authorization: Bearer <SUPERADMIN_JWT>
+
+{
+  "name": "New Moderator",
+  "email": "moderator@drpsych.com",
+  "password": "moderator123",
+  "role": "moderator",
+  "roleDescription": "Handles therapist approvals"
+}
+
+### ✅ Get all admins (superadmin or moderator)
+GET http://localhost:3000/api/admins
+Authorization: Bearer <SUPERADMIN_OR_MODERATOR_JWT>
+
+### ✅ Get single admin by ID
+GET http://localhost:3000/api/admins/665abc123456789012345678
+Authorization: Bearer <SUPERADMIN_JWT>
+
+### ✅ Delete admin (superadmin only)
+DELETE http://localhost:3000/api/admins/665abc123456789012345678
+Authorization: Bearer <SUPERADMIN_JWT>
+
+### ✅ Change your password (authenticated admin)
+PUT http://localhost:3000/api/admins/change-password
+Content-Type: application/json
+Authorization: Bearer <ADMIN_JWT>
+
+{
+  "currentPassword": "oldpass123",
+  "newPassword": "newpass456"
+}

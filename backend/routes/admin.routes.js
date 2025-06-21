@@ -8,10 +8,12 @@ import {
   createAdmin,
   getAdmins,
   getAdminById,
-  deleteAdmin
+  deleteAdmin,
+  changeAdminPassword
 } from '../controllers/admin.controller.js';
 import { authenticate } from '../middlewares/auth.middleware.js';
 import { authorizeAdminRole } from '../middlewares/role.middleware.js'; // Custom role check
+
 
 const router = express.Router();
 

@@ -20,6 +20,7 @@ const adminSchema = new mongoose.Schema(
       type: String,
       default: "Full system control", // override for other roles
     },
+    ip_address: String,
     isActive: { type: Boolean, default: true },
   },
   { timestamps: true }

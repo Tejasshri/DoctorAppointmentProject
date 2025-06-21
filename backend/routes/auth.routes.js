@@ -1,30 +1,29 @@
-/**
- * Auth Routes - Login, Signup, Token Verification
- * Developed by Tejas and Sanju
- */
-import express from "express";
-import { signup, login } from "../controllers/auth.controller.js";
-import { authenticate } from "../middlewares/auth.middleware.js";
-import { checkEmail } from '../controllers/auth.controller.js';
+import express from 'express';
+import {
+  signup,
+  loginAdmin,
+  loginTherapist,
+  requestOTP,
+  verifyOTP,
+  checkEmail
+} from '../controllers/auth.controller.js';
 
 const router = express.Router();
 
-// ✅ Signup - Registers a new user or therapist
-// Accepts name, email, phone, and password
-router.post("/signup", signup);
+// 🔐 Signup (user & therapist)
+router.post('/signup', signup);
 
-// ✅ Login - Authenticates user and returns JWT
-// Requires email and password in body
-router.post("/login", login);
+// 🔐 Admin login
+router.post('/admin-login', loginAdmin);
 
-// ✅ Verify - Validates JWT token and returns user info
-// Requires Authorization header with Bearer token
-router.get("/verify", authenticate, (req, res) => {
-  res.json({ message: "Token is valid", user: req.user });
-});
+// 🧠 Therapist login
+router.post('/therapist-login', loginTherapist);
 
+// 📲 OTP login flow for users
+router.post('/request-otp', requestOTP);
+router.post('/verify-otp', verifyOTP);
 
-
+// 🧪 Utility
 router.post('/check-email', checkEmail);
 
 export default router;

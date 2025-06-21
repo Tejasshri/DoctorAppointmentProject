@@ -12,13 +12,15 @@ async function sendEmail({ to, subject, text, html }) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "your-email@gmail.com",
-        pass: "your-app-password", // Use Gmail App Password here
+        user: "tejasshrishekhar08@gmail.com",
+        pass: process.env.GOOGLE_APP_PASSWORD, // Use Gmail App Password here
       },
     });
 
+    console.log(to, subject, text, html);
+
     const info = await transporter.sendMail({
-      from: '"Your Name" <your-email@gmail.com>',
+      from: '"drPsych" tejasshrishekhar08@gmail.com',
       to,
       subject,
       text,
@@ -28,7 +30,8 @@ async function sendEmail({ to, subject, text, html }) {
     console.log("✅ Email sent:", info.messageId);
   } catch (error) {
     console.error("❌ Error sending email:", error);
+    throw new Error(error?.message);
   }
 }
 
-module.exports = sendEmail;
+export default sendEmail;

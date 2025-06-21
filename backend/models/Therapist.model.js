@@ -11,6 +11,7 @@ const TherapistSchema = new mongoose.Schema({
   profilePhotoUrl: String,
   status: { type: String, enum: ['pending', 'approved', 'rejected', 'suspended'], default: 'pending' },
   availability: Object,
+  ip_address: String,
   isActive: { type: Boolean, default: true },
   createdAt: { type: Date, default: Date.now },
 });

@@ -32,3 +32,23 @@ Content-Type: application/json
 {
   "email": "tejas@example.com"
 }
+
+
+### Request OTP
+POST http://localhost:3005/api/auth/request-otp
+Content-Type: application/json
+
+{
+  "phone": "9876543210",
+  "email": "cioncancerclinicsdevelopers@gmail.com"
+}
+
+### Verify OTP
+POST http://localhost:3005/api/auth/verify-otp
+Content-Type: application/json
+
+{
+  "phone": "9876543210",
+  "email": "cioncancerclinicsdevelopers@gmail.com",
+  "otp": "444675"
+}
