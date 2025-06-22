@@ -9,7 +9,7 @@ Content-Type: application/json
 ###
 
 ### 🔐 Admin Login
-POST http://localhost:3000/api/auth/admin-login
+POST http://localhost:3005/api/auth/admin-login
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 ###
 
 ### 🧠 Therapist Login
-POST http://localhost:3000/api/auth/therapist-login
+POST http://localhost:3005/api/auth/therapist-login
 Content-Type: application/json
 
 {
@@ -31,7 +31,7 @@ Content-Type: application/json
 ###
 
 ### 📲 Request OTP (User Login)
-POST http://localhost:3000/api/auth/request-otp
+POST http://localhost:3005/api/auth/request-otp
 Content-Type: application/json
 
 {
@@ -42,19 +42,19 @@ Content-Type: application/json
 ###
 
 ### ✅ Verify OTP
-POST http://localhost:3000/api/auth/verify-otp
+POST http://localhost:3005/api/auth/verify-otp
 Content-Type: application/json
 
 {
   "phone": "9876543210",
   "email": "user@example.com",
-  "otp": "123456" // replace with actual OTP received
+  "otpCode": "471651"
 }
 
 ###
 
 ### 🛡️ Verify User Token
-POST http://localhost:3000/api/auth/verify-by-jwt
+POST http://localhost:3005/api/auth/verify-by-jwt
 Authorization: Bearer YOUR_TOKEN_HERE
 Content-Type: application/json
 

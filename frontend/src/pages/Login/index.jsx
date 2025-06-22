@@ -112,7 +112,7 @@ const Login = () => {
       const res = await fetch("http://localhost:3005/api/auth/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, otp, email }),
+        body: JSON.stringify({ phone, otpCode: otp, email }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "OTP failed");
@@ -191,30 +191,29 @@ const Login = () => {
           )}
 
           {/* OTP Input (User) */}
-          {!role ||
-            (role === "user" && (
-              <>
-                <input
-                  type="text"
-                  placeholder="Phone"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  style={{ display: "block", marginBottom: 10, width: "100%" }}
-                />
-                <input
-                  type="text"
-                  placeholder="OTP"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                  style={{ display: "block", marginBottom: 10, width: "100%" }}
-                />
-                <button
-                  onClick={otpSent ? loginUserByOTP : sendOTP}
-                  style={{ width: "100%", padding: "8px" }}>
-                  {otpSent ? "Login with OTP" : "Send Otp"}
-                </button>
-              </>
-            ))}
+          {(!role || role === "user") && (
+            <>
+              <input
+                type="text"
+                placeholder="Phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                style={{ display: "block", marginBottom: 10, width: "100%" }}
+              />
+              <input
+                type="text"
+                placeholder="OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                style={{ display: "block", marginBottom: 10, width: "100%" }}
+              />
+              <button
+                onClick={otpSent ? loginUserByOTP : sendOTP}
+                style={{ width: "100%", padding: "8px" }}>
+                {otpSent ? "Login with OTP" : "Send Otp"}
+              </button>
+            </>
+          )}
           {!email && <button onClick={setMail}>set temp mail for test</button>}
         </form>
       )}
