@@ -5,7 +5,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzY
 
 {
   "name": "New Moderator",
-  "email": "moderator@drpsych.com",
+  "email": "moderator1@drpsych.com",
   "password": "moderator123",
   "roleDescription": "Handles therapist approvals"
 }

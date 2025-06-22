@@ -2,8 +2,6 @@
 import User from "../../models/User.model.js";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
 export const requestOTP = async (req, res) => {
   const { email, phone } = req.body;
   console.log(email, "email");
@@ -32,7 +30,11 @@ export const verifyOTP = async (req, res) => {
   const { email, otpCode } = req.body;
   console.log(email, otpCode);
   const user = await User.findOne({ email });
-  console.log(user?.otpCode, otpCode, !user || user.otpCode !== otpCode || user.otpExpires < new Date());
+  console.log(
+    user?.otpCode,
+    otpCode,
+    !user || user.otpCode !== otpCode || user.otpExpires < new Date()
+  );
   if (!user || user.otpCode !== otpCode || user.otpExpires < new Date()) {
     return res.status(401).json({ message: "OTP invalid or expired" });
   }
@@ -63,7 +65,7 @@ export const verifyUserToken = async (req, res) => {
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id).select("-otpCode -otpExpires");
 
     if (!user || user.role !== "user") {
