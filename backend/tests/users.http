@@ -3,8 +3,9 @@ POST http://localhost:3005/api/users
 Content-Type: application/json
 
 {
-  "name": "Ravi",
-  "email": "ravi@example.com",
+  "name": "sanju",
+  "email": "appugaru0@gmail.com",
+  "role" : "user",
   "phone": "9876543210"
 }
 

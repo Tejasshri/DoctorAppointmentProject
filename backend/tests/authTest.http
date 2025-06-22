@@ -48,7 +48,7 @@ Content-Type: application/json
 {
   "phone": "9876543210",
   "email": "user@example.com",
-  "otpCode": "471651"
+  "otpCode": "717474"
 }
 
 ###

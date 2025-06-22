@@ -14,7 +14,6 @@ export const requestOTP = async (req, res) => {
 
   if (!user) {
     user = await User.create({ email, phone, otpCode, otpExpires });
-    console.log(email, phone, otpCode, otpExpires);
   } else {
     user.otpCode = otpCode;
     user.otpExpires = otpExpires;
