@@ -10,15 +10,19 @@ export const requestOTP = async (req, res) => {
   const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
   const otpExpires = new Date(Date.now() + 5 * 60 * 1000);
 
-  let user = await User.findOne({ $or: [{ email }, { phone }] });
+  let user = await User.findOne({ $or: [{ email }] });
 
   if (!user) {
     user = await User.create({ email, phone, otpCode, otpExpires });
+    console.log(email, phone, otpCode, otpExpires);
   } else {
     user.otpCode = otpCode;
     user.otpExpires = otpExpires;
     await user.save();
   }
+
+  const tempUser = await User.findOne({ email });
+  console.log(tempUser);
 
   console.log(`${otpCode} otpCode`);
   // TODO: Send OTP via email/SMS
@@ -27,8 +31,9 @@ export const requestOTP = async (req, res) => {
 
 export const verifyOTP = async (req, res) => {
   const { email, otpCode } = req.body;
-
+  console.log(email, otpCode);
   const user = await User.findOne({ email });
+  console.log(user);
   if (!user || user.otpCode !== otpCode || user.otpExpires < new Date()) {
     return res.status(401).json({ message: "OTP invalid or expired" });
   }
@@ -38,7 +43,7 @@ export const verifyOTP = async (req, res) => {
   user.role = "user";
   await user.save();
 
-  const token = jwt.sign({ id: user._id, role: "user" }, JWT_SECRET, {
+  const token = jwt.sign({ id: user._id, role: "user" }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
 
