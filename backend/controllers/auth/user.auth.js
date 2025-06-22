@@ -32,7 +32,7 @@ export const verifyOTP = async (req, res) => {
   const { email, otpCode } = req.body;
   console.log(email, otpCode);
   const user = await User.findOne({ email });
-  console.log(user);
+  console.log(user?.otpCode, otpCode, !user || user.otpCode !== otpCode || user.otpExpires < new Date());
   if (!user || user.otpCode !== otpCode || user.otpExpires < new Date()) {
     return res.status(401).json({ message: "OTP invalid or expired" });
   }
