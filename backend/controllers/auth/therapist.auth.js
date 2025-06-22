@@ -3,8 +3,6 @@ import Therapist from "../../models/Therapist.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
 export const registerTherapist = async (req, res) => {
   const { name, email, phone, password, languages, specializations, experienceYears } = req.body;
 
@@ -33,7 +31,7 @@ export const loginTherapist = async (req, res) => {
   const isMatch = await bcrypt.compare(password, therapist.passwordHash);
   if (!isMatch) return res.status(401).json({ message: "Invalid password" });
 
-  const token = jwt.sign({ id: therapist._id, role: 'therapist' }, JWT_SECRET, {
+  const token = jwt.sign({ id: therapist._id, role: 'therapist' }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
 

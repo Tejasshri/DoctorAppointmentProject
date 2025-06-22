@@ -3,7 +3,6 @@ import Admin from "../../models/Admin.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-const JWT_SECRET = process.env.JWT_SECRET;
 
 export const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
@@ -14,7 +13,7 @@ export const loginAdmin = async (req, res) => {
   const isMatch = await admin.matchPassword(password);
   if (!isMatch) return res.status(401).json({ message: "Invalid password" });
 
-  const token = jwt.sign({ id: admin._id, role: admin.role }, JWT_SECRET, {
+  const token = jwt.sign({ id: admin._id, role: admin.role }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
 

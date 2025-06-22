@@ -1,30 +1,30 @@
 ### ✅ Create a new admin (superadmin only)
-POST http://localhost:3000/api/admins
+POST http://localhost:3005/api/admins
 Content-Type: application/json
 Authorization: Bearer <SUPERADMIN_JWT>
 
 {
   "name": "New Moderator",
-  "email": "moderator@drpsych.com",
+  "email": "moderator1@drpsych.com",
   "password": "moderator123",
   "role": "moderator",
   "roleDescription": "Handles therapist approvals"
 }
 
 ### ✅ Get all admins (superadmin or moderator)
-GET http://localhost:3000/api/admins
-Authorization: Bearer <SUPERADMIN_OR_MODERATOR_JWT>
+GET http://localhost:3005/api/admins
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTdhOWViNTE2YTM2NGE4ZjQ2NzZjZSIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NTA1NzY0MzQsImV4cCI6MTc1MTE4MTIzNH0._S4L_l9HneRrmU75GU8Xc-VJTbzyKC7cGT403VBVtlA
 
 ### ✅ Get single admin by ID
-GET http://localhost:3000/api/admins/665abc123456789012345678
+GET http://localhost:3005/api/admins/665abc123456789012345678
 Authorization: Bearer <SUPERADMIN_JWT>
 
 ### ✅ Delete admin (superadmin only)
-DELETE http://localhost:3000/api/admins/665abc123456789012345678
+DELETE http://localhost:3005/api/admins/665abc123456789012345678
 Authorization: Bearer <SUPERADMIN_JWT>
 
 ### ✅ Change your password (authenticated admin)
-PUT http://localhost:3000/api/admins/change-password
+PUT http://localhost:3005/api/admins/change-password
 Content-Type: application/json
 Authorization: Bearer <ADMIN_JWT>
 
