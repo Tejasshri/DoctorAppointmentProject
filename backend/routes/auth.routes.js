@@ -1,29 +1,34 @@
-import express from 'express';
+// routes/auth.routes.js
+import express from "express";
+import { loginAdmin } from "../controllers/auth/admin.auth.js";
 import {
-  signup,
-  loginAdmin,
+  registerTherapist,
   loginTherapist,
+} from "../controllers/auth/therapist.auth.js";
+import {
   requestOTP,
   verifyOTP,
-  checkEmail
-} from '../controllers/auth.controller.js';
+  verifyUserToken,
+} from "../controllers/auth/user.auth.js";
+import { checkEmail } from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
-// 🔐 Signup (user & therapist)
-router.post('/signup', signup);
+// Admin
+router.post("/admin-login", loginAdmin);
 
-// 🔐 Admin login
-router.post('/admin-login', loginAdmin);
+// Therapist
+router.post("/therapist-register", registerTherapist);
+router.post("/therapist-login", loginTherapist);
 
-// 🧠 Therapist login
-router.post('/therapist-login', loginTherapist);
+// User
+router.post("/request-otp", requestOTP);
+router.post("/verify-otp", verifyOTP);
 
-// 📲 OTP login flow for users
-router.post('/request-otp', requestOTP);
-router.post('/verify-otp', verifyOTP);
+// verify token
+router.get("/verify-token", verifyUserToken);
 
-// 🧪 Utility
-router.post('/check-email', checkEmail);
+// getting email informtion
+router.post("/check-email", checkEmail);
 
 export default router;
