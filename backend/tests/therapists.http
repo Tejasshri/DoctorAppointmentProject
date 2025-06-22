@@ -1,5 +1,5 @@
 ### ✅ Create therapist (manual)
-POST http://localhost:3000/api/therapists
+POST http://localhost:3005/api/therapists
 Content-Type: application/json
 
 {
@@ -12,14 +12,14 @@ Content-Type: application/json
 }
 
 ### ✅ Get all therapists
-GET http://localhost:3000/api/therapists
+GET http://localhost:3005/api/therapists
 
 ### ✅ Get therapist by ID
-GET http://localhost:3000/api/therapists/665defabcdefabcdefabcdef
+GET http://localhost:3005/api/therapists/685792244edef03f090a3f01
 
 ### ✅ Update therapist (requires auth)
-PUT http://localhost:3000/api/therapists/665defabcdefabcdefabcdef
-Authorization: Bearer <PASTE_JWT_HERE>
+PUT http://localhost:3005/api/therapists/665defabcdefabcdefabcdef
+Authorization: Bearer AkkadBakkadBambeBoJakarMuhDoLo
 Content-Type: application/json
 
 {
