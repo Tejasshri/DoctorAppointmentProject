@@ -6,11 +6,11 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 export const requestOTP = async (req, res) => {
   const { email, phone } = req.body;
-
+  console.log(email, "email");
   const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
   const otpExpires = new Date(Date.now() + 5 * 60 * 1000);
 
-  let user = await User.findOne({ $or: [{ email }] });
+  let user = await User.findOne({ email });
 
   if (!user) {
     user = await User.create({ email, phone, otpCode, otpExpires });
@@ -22,7 +22,7 @@ export const requestOTP = async (req, res) => {
   }
 
   const tempUser = await User.findOne({ email });
-  console.log(tempUser);
+  console.log(tempUser, email);
 
   console.log(`${otpCode} otpCode`);
   // TODO: Send OTP via email/SMS
@@ -43,9 +43,13 @@ export const verifyOTP = async (req, res) => {
   user.role = "user";
   await user.save();
 
-  const token = jwt.sign({ id: user._id, role: "user" }, process.env.JWT_SECRET, {
-    expiresIn: "7d",
-  });
+  const token = jwt.sign(
+    { id: user._id, role: "user" },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "7d",
+    }
+  );
 
   res.json({ token, user });
 };

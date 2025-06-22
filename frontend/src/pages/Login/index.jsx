@@ -131,7 +131,7 @@ const Login = () => {
       const res = await fetch("http://localhost:3005/api/auth/request-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ email }),
       });
 
       const data = await res.json();
@@ -208,9 +208,14 @@ const Login = () => {
                 style={{ display: "block", marginBottom: 10, width: "100%" }}
               />
               <button
-                onClick={otpSent ? loginUserByOTP : sendOTP}
+                onClick={loginUserByOTP}
                 style={{ width: "100%", padding: "8px" }}>
-                {otpSent ? "Login with OTP" : "Send Otp"}
+                {"Login with OTP"}
+              </button>
+              <button
+                onClick={sendOTP}
+                style={{ width: "100%", padding: "8px" }}>
+                {"Send Otp"}
               </button>
             </>
           )}
