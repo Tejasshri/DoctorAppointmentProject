@@ -1,14 +1,14 @@
 ### ✅ Submit feedback after session
-POST http://localhost:3000/api/feedback
-Authorization: Bearer <PASTE_JWT_HERE>
+POST http://localhost:3005/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
 Content-Type: application/json
 
 {
-  "sessionId": "665session1234567890abcdef",
+  "sessionId": "6857a70f52a1e7a47a00bb5d",
   "rating": 5,
   "comment": "The session was helpful and professional."
 }
 
 ### ✅ Get feedback for a session
-GET http://localhost:3000/api/feedback/665session1234567890abcdef
-Authorization: Bearer <PASTE_JWT_HERE>
+GET http://localhost:3005/api/feedback/6857a70f52a1e7a47a00bb5d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ

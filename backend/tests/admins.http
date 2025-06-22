@@ -1,30 +1,31 @@
 ### ✅ Create a new admin (superadmin only)
-POST http://localhost:3000/api/admins
+POST http://localhost:3005/api/admins
 Content-Type: application/json
-Authorization: Bearer <SUPERADMIN_JWT>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
 
 {
   "name": "New Moderator",
   "email": "moderator@drpsych.com",
   "password": "moderator123",
-  "role": "moderator",
   "roleDescription": "Handles therapist approvals"
 }
 
 ### ✅ Get all admins (superadmin or moderator)
-GET http://localhost:3000/api/admins
-Authorization: Bearer <SUPERADMIN_OR_MODERATOR_JWT>
+GET http://localhost:3005/api/admins
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
 
 ### ✅ Get single admin by ID
-GET http://localhost:3000/api/admins/665abc123456789012345678
-Authorization: Bearer <SUPERADMIN_JWT>
+GET http://localhost:3005/api/admins/665abc123456789012345678
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
+
 
 ### ✅ Delete admin (superadmin only)
-DELETE http://localhost:3000/api/admins/665abc123456789012345678
-Authorization: Bearer <SUPERADMIN_JWT>
+DELETE http://localhost:3005/api/admins/665abc123456789012345678
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
+
 
 ### ✅ Change your password (authenticated admin)
-PUT http://localhost:3000/api/admins/change-password
+PUT http://localhost:3005/api/admins/change-password
 Content-Type: application/json
 Authorization: Bearer <ADMIN_JWT>
 

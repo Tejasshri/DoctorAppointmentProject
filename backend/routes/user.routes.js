@@ -14,7 +14,7 @@ import { authorizeRole } from '../middlewares/role.middleware.js';
 const router = express.Router();
 
 router.post('/', createUser);
-router.get('/', authenticate, authorizeRole('admin'), getUsers);
+router.get('/', authenticate, authorizeRole('superadmin'), getUsers);
 router.get('/:id', authenticate, getUserById);
 
 export default router;

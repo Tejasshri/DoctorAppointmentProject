@@ -10,9 +10,9 @@ Content-Type: application/json
 }
 
 ### ✅ Get all users (admin only)
-GET http://localhost:3000/api/users
-Authorization: Bearer <PASTE_ADMIN_JWT_HERE>
+GET http://localhost:3005/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
 
 ### ✅ Get user by ID
-GET http://localhost:3000/api/users/665abc123456789012345678
-Authorization: Bearer <PASTE_JWT_HERE>
+GET http://localhost:3005/api/users/68579bd7c92cd16d8711583f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
