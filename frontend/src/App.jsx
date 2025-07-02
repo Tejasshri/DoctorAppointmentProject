@@ -1,7 +1,7 @@
 // src/App.jsx
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
+import socket from "./utils/socket";
 
 import useAuthStore from "./stores/authStore";
 import { useEffect } from "react";
@@ -26,6 +26,10 @@ function Home() {
 export default function App() {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    
+  }, []);
 
   // utils/auth.js
 
