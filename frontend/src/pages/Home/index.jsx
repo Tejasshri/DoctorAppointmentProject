@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Navar from "../../components/Navbar/index";
+import Banner from "../../components/Banner/index";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <div>
+      <Navar />
+      <Banner />
+    </div>
+  );
+};
 
-export default Home
+export default Home;

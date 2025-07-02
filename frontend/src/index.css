@@ -11,6 +11,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --brandColor: #336780;
 }
 
 a {
@@ -30,8 +31,6 @@ body {
   color: #000;
   min-height: 100vh;
 }
-
-
 
 button {
   border-radius: 8px;
