@@ -1,6 +1,6 @@
 ### ✅ Create a new session
-POST http://localhost:3000/api/sessions
-Authorization: Bearer <PASTE_JWT_HERE>
+POST http://localhost:3005/api/sessions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
 Content-Type: application/json
 
 {
@@ -11,12 +11,12 @@ Content-Type: application/json
 }
 
 ### ✅ Get all sessions
-GET http://localhost:3000/api/sessions
-Authorization: Bearer <PASTE_JWT_HERE>
+GET http://localhost:3005/api/sessions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
 
 ### ✅ Update session status
-PUT http://localhost:3000/api/sessions/665session1234567890abcdef
-Authorization: Bearer <PASTE_JWT_HERE>
+PUT http://localhost:3005/api/sessions/6857a70f52a1e7a47a00bb5d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
 Content-Type: application/json
 
 {

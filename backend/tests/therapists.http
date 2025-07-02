@@ -18,8 +18,9 @@ GET http://localhost:3005/api/therapists
 GET http://localhost:3005/api/therapists/685792244edef03f090a3f01
 
 ### ✅ Update therapist (requires auth)
-PUT http://localhost:3005/api/therapists/665defabcdefabcdefabcdef
-Authorization: Bearer AkkadBakkadBambeBoJakarMuhDoLo
+PUT http://localhost:3005/api/therapists/6857986bba5a5fc607a964d0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
+
 Content-Type: application/json
 
 {

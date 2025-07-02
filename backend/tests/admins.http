@@ -1,27 +1,28 @@
 ### ✅ Create a new admin (superadmin only)
 POST http://localhost:3005/api/admins
 Content-Type: application/json
-Authorization: Bearer <SUPERADMIN_JWT>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
 
 {
   "name": "New Moderator",
   "email": "moderator1@drpsych.com",
   "password": "moderator123",
-  "role": "moderator",
   "roleDescription": "Handles therapist approvals"
 }
 
 ### ✅ Get all admins (superadmin or moderator)
 GET http://localhost:3005/api/admins
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTdhOWViNTE2YTM2NGE4ZjQ2NzZjZSIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NTA1NzY0MzQsImV4cCI6MTc1MTE4MTIzNH0._S4L_l9HneRrmU75GU8Xc-VJTbzyKC7cGT403VBVtlA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
 
 ### ✅ Get single admin by ID
 GET http://localhost:3005/api/admins/665abc123456789012345678
-Authorization: Bearer <SUPERADMIN_JWT>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
+
 
 ### ✅ Delete admin (superadmin only)
 DELETE http://localhost:3005/api/admins/665abc123456789012345678
-Authorization: Bearer <SUPERADMIN_JWT>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTY3ZmQzYTYyYWI3NGJjZTljZjNhYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwNTczNzUxLCJleHAiOjE3NTExNzg1NTF9.woav_0ABcEsfffHPo334UYw_WKvKSaR229oKIp_B_oQ
+
 
 ### ✅ Change your password (authenticated admin)
 PUT http://localhost:3005/api/admins/change-password
