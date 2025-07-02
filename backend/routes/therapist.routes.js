@@ -34,4 +34,5 @@ router.put("/:id", authenticate, updateTherapist);
 // Permanently deletes therapist (admin use only)
 router.delete("/:id", authenticate, deleteTherapist);
 
+
 export default router;
