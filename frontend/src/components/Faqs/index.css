@@ -1,0 +1,145 @@
+.faqs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: center;
+  margin-top: 1.4rem;
+  padding: 0 1.04rem;
+}
+
+.faqs-title {
+  font-size: 1rem;
+  color: var(--brandColor);
+  line-height: 1rem;
+  font-weight: 600;
+}
+@media screen and (min-width: 768px) {
+  .faqs-container .title {
+    text-align: left;
+    align-self: flex-start;
+    margin-left: 2rem;
+  }
+
+  .faqs-title {
+    font-size: .8rem;
+    color: var(--brandColor);
+    line-height: .8rem;
+    font-weight: 600;
+        padding: 0 0 0 1.88rem;
+  }
+  .faqs-container .why-choose-us__head-title {
+    text-align: left;
+    align-self: flex-start;
+    margin-left: 2rem;
+    margin-top: 0.4rem;
+  }
+}
+
+.accordion-main-container {
+  margin-top: 1.55rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.accordion {
+  width: 100%;
+}
+
+.accordion-title,
+.accordion-content {
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0.4rem 0;
+  text-align: left;
+  position: relative;
+}
+
+.accordion-title > p {
+  width: 14.5rem;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+}
+
+.accordion-content {
+  display: none;
+  font-weight: 400;
+  line-height: 0.72rem;
+  color: #000000;
+  position: relative;
+  font-size: 0.6rem;
+  padding-right: 1.5rem;
+  margin-top: 1.2rem;
+}
+
+/* Show content if parent has .open */
+.accordion-item.open .accordion-content {
+  display: block;
+}
+
+.arrow {
+  width: 0.603rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--brandColor, #872f8f);
+  color: white;
+  height: 0.62rem;
+  width: 0.62rem;
+  font-size: 0.4rem;
+  border-radius: 0.1rem;
+  position: absolute;
+  right: 0;
+  top: 0.28rem;
+}
+
+.accordion-item {
+  border-bottom: solid 0.1rem #f3f3f3;
+  width: 100%;
+}
+
+.accordion-item.open .accordion-title p {
+  color: var(--brandColor, #872f8f); /* fallback in case variable is missing */
+}
+@media screen and (min-width: 768px) {
+  .faqs-container {
+    padding: 0 0 1.66rem 0;
+  }
+
+  .accordion-main-container {
+    padding: 0 2.08rem;
+    margin-top: 1.12rem;
+
+    gap: 0rem;
+  }
+
+  .accordion-title > p,
+  .accordion-content {
+    width: 100%;
+    font-size: 0.5rem;
+    line-height: 0.79rem;
+  }
+
+  .accordion-content {
+    font-size: 0.5rem;
+    line-height: 0.79rem;
+  }
+
+  .accordion-item {
+    font-size: 0.41rem;
+    border-bottom: solid 0.041rem #f3f3f3;
+  }
+
+  .arrow {
+    width: 0.52rem !important;
+    height: 0.52rem !important;
+    font-size: 0.3rem;
+  }
+}

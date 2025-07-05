@@ -1,0 +1,146 @@
+.wrapper {
+  background-color: #f5fafd;
+  padding: 60px 20px;
+  text-align: center;
+  padding: 0 1.8rem;
+  margin: 1.8rem 0;
+}
+
+.title {
+  font-size: 1rem;
+  line-height: 1.3rem;
+  font-weight: 700;
+  color: var(--brandColor);
+  margin-bottom: 0.3rem;
+}
+
+.subtitle {
+  font-size: 0.6rem;
+  line-height: 0.8rem;
+  font-weight: 300;
+  color: var(--grayColor);
+}
+
+.stepsGrid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem 0;
+  margin: 2.03rem auto;
+  flex-wrap: wrap;
+}
+
+.stepCard {
+  background-color: #fff;
+  padding: 2.5rem 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.stepCard:hover {
+  transform: translateY(-0.8rem);
+}
+
+.stepCard:hover .stepTitle,
+.stepCard:hover .icon,
+.stepCard:hover .stepDesc {
+  color: #fff;
+}
+
+.badge {
+  background-color: #336780;
+  color: white;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.58 auto;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 0.5rem #f5fafd;
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+  color: var(--brandColor);
+}
+
+.stepTitle {
+  color: var(--brandColor);
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+}
+
+.stepDesc {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.button {
+  background-color: #336780;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 0.3rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.button:hover {
+  background-color: #29516b;
+}
+
+.stepCard:hover {
+  background-color: var(--brandColor);
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    padding: 0 1.88rem;
+  }
+  .stepsGrid {
+    gap: 1.5rem 1rem;
+  }
+  .stepCard {
+    padding: 1.3rem 0.8rem;
+    color: #fff;
+    width: 10rem;
+    border-radius: 0.5rem;
+  }
+
+  .badge {
+    width: 2rem;
+    font-size: 0.5rem;
+    height: 2rem;
+  }
+  .icon {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .stepTitle {
+    font-size: 0.5rem;
+  }
+  .stepDesc {
+    font-size: 0.4rem;
+  }
+  .button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 0.3rem;
+    font-size: 0.5rem;
+    cursor: pointer;
+  }
+}

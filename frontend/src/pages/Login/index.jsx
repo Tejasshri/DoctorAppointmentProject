@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import styles from "./index.module.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -150,7 +151,7 @@ const Login = () => {
   return (
     <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
       <h2>Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
 
       {user ? (
         <div>
@@ -160,19 +161,20 @@ const Login = () => {
           <p>Role: {role}</p>
         </div>
       ) : (
-        <form onSubmit={(e) => e.preventDefault()}>
-          {/* Email Input */}
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className={styles.formWrapper}
+        >
           <input
             type="email"
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => checkEmailRole(email)}
-            style={{ display: "block", marginBottom: 10, width: "100%" }}
+            className={styles.input}
           />
-          {role && <p style={{ color: "green" }}>Detected Role: {role}</p>}
+          {role && <p className={styles.detectedRole}>Detected Role: {role}</p>}
 
-          {/* Password Input (Admin/Therapist) */}
           {(role === "admin" || role === "therapist") && (
             <>
               <input
@@ -180,17 +182,17 @@ const Login = () => {
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                style={{ display: "block", marginBottom: 10, width: "100%" }}
+                className={styles.input}
               />
               <button
                 onClick={role === "admin" ? loginAdmin : loginTherapist}
-                style={{ width: "100%", padding: "8px" }}>
+                className={styles.button}
+              >
                 Login as {role}
               </button>
             </>
           )}
 
-          {/* OTP Input (User) */}
           {(!role || role === "user") && (
             <>
               <input
@@ -198,28 +200,35 @@ const Login = () => {
                 placeholder="Phone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                style={{ display: "block", marginBottom: 10, width: "100%" }}
+                className={styles.input}
               />
               <input
                 type="text"
                 placeholder="OTP"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
-                style={{ display: "block", marginBottom: 10, width: "100%" }}
+                className={styles.input}
               />
-              <button
-                onClick={loginUserByOTP}
-                style={{ width: "100%", padding: "8px" }}>
-                {"Login with OTP"}
+              <button onClick={loginUserByOTP} className={styles.button}>
+                Login with OTP
               </button>
               <button
                 onClick={sendOTP}
-                style={{ width: "100%", padding: "8px" }}>
-                {"Send Otp"}
+                className={`${styles.button} ${styles.buttonSecondary}`}
+              >
+                Send OTP
               </button>
             </>
           )}
-          {!email && <button onClick={setMail}>set temp mail for test</button>}
+
+          {!email && (
+            <button
+              onClick={setMail}
+              className={`${styles.button} ${styles.buttonDanger}`}
+            >
+              Set Temp Mail for Test
+            </button>
+          )}
         </form>
       )}
     </div>

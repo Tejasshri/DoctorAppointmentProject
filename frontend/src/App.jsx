@@ -10,14 +10,19 @@ import Cookies from "js-cookie"; // ✅ CORRECT
 import { useState } from "react";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function App() {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+    });
+  }, []);
 
   // utils/auth.js
 

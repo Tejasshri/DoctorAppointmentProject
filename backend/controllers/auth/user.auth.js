@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 export const requestOTP = async (req, res) => {
   const { email, phone } = req.body;
-  console.log(email, "email");
+  
   const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
   const otpExpires = new Date(Date.now() + 5 * 60 * 1000);
 
