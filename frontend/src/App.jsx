@@ -13,6 +13,8 @@ import Home from "./pages/Home";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+import './App.css'
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);

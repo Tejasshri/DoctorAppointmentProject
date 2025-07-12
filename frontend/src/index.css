@@ -7,7 +7,7 @@
 
   /*========== Colors ==========*/
   /*Color mode HSL(hue, saturation, lightness)*/
-  --first-color: hsl(216, 96%, 64%);
+  --first-color: hsl(216, 50%, 8%);
   --white-color: hsl(0, 0%, 100%);
   --dark-color: hsl(216, 26%, 11%);
   --dark-color-light: hsl(216, 14%, 24%);
@@ -61,7 +61,6 @@ a:hover {
   color: #535bf2;
 }
 
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -80,4 +79,18 @@ a:hover {
   html {
     font-size: 2.76vw;
   }
+}
+
+#root {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  border: 2px solid violet;
+}
+
+html {
+  overflow-y: scroll;
+  height: 100%;
 }

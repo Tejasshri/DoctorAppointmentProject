@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import styles from "./index.module.css";
+import { url } from "../../config/settings";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
   const [role, setRole] = useState(null);
-  const [password, setPassword] = useState("");
-
-  const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    email: "tejasshrishekhar08@gmail.com",
+    phone: "7895441429",
+    otp: "",
+    role: "user",
+    password: "12345",
+    confirmPassword: "12345",
+    tAndC: false,
+  });
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [phone, setPhone] = useState("");
+  const [step, setStep] = useState(1);
 
-  // ✅ Verify JWT token on mount
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) loginByToken(token);
   }, []);
 
-  // ✅ Email blur check
   const checkEmailRole = async (email) => {
     if (!email.includes("@")) return;
     try {
@@ -28,7 +32,6 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-
       const data = await res.json();
       if (res.ok && data.exists) {
         setRole(data.role);
@@ -43,7 +46,6 @@ const Login = () => {
     }
   };
 
-  // ✅ Token-based login
   const loginByToken = async (token) => {
     try {
       const res = await fetch("http://localhost:3005/api/auth/verify-by-jwt", {
@@ -64,75 +66,13 @@ const Login = () => {
     }
   };
 
-  // ✅ Admin login
-  const loginAdmin = async () => {
-    try {
-      const res = await fetch("http://localhost:3005/api/auth/admin-login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Admin login failed");
-
-      Cookies.set("token", data.token);
-      setUser(data.user);
-      setRole("admin");
-      setError("");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  // ✅ Therapist login
-  const loginTherapist = async () => {
-    try {
-      const res = await fetch(
-        "http://localhost:3005/api/auth/therapist-login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        }
-      );
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Therapist login failed");
-
-      Cookies.set("token", data.token);
-      setUser(data.user);
-      setRole("therapist");
-      setError("");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  // ✅ OTP login (User)
-  const loginUserByOTP = async () => {
-    try {
-      const res = await fetch("http://localhost:3005/api/auth/verify-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, otpCode: otp, email }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "OTP failed");
-
-      Cookies.set("token", data.token);
-      setUser(data.user);
-      setRole("user");
-      setError("");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
   const sendOTP = async () => {
+    setLoading(true);
     try {
-      const res = await fetch("http://localhost:3005/api/auth/request-otp", {
+      const res = await fetch(`${url}/api/auth/request-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: user.email }),
       });
 
       const data = await res.json();
@@ -140,97 +80,164 @@ const Login = () => {
 
       alert("📩 OTP sent successfully");
       setOtpSent(true);
+      setStep(2);
       setError("");
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const setMail = () => setEmail("cioncancerclinicsdevelopers@gmail.com");
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setUser((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    console.log(user)
+    e.preventDefault();
+
+    if (!user.tAndC) {
+      setError("Please agree to Terms and Conditions.");
+      return;
+    }
+
+    if (user.password !== user.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch(`${url}/api/auth/verify-otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phone: user.phone,
+          otpCode: user.otp,
+          email: user.email,
+          password: user.password,
+          confirmPassword: user.confirmPassword,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "OTP verification failed");
+
+      Cookies.set("token", data.token);
+      setUser(data.user);
+      setRole("user");
+      setError("");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
-      <h2>Login</h2>
-      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
+    <div className={styles.signupPageContainer}>
+      <form className={styles.signupForm} onSubmit={handleSubmit}>
+        <h2 className={styles.signupFormHeading}>Create an account?</h2>
 
-      {user ? (
-        <div>
-          <p>
-            ✅ Logged in as <strong>{user.name || user.email}</strong>
-          </p>
-          <p>Role: {role}</p>
-        </div>
-      ) : (
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className={styles.formWrapper}
-        >
-          <input
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onBlur={() => checkEmailRole(email)}
-            className={styles.input}
-          />
-          {role && <p className={styles.detectedRole}>Detected Role: {role}</p>}
-
-          {(role === "admin" || role === "therapist") && (
-            <>
+        {step === 1 ? (
+          <>
+            <div className={styles.formField}>
+              <label htmlFor="signupMail">Email</label>
               <input
+                name="email"
+                id="signupMail"
+                type="text"
+                placeholder="joedoe75@gmail.com"
+                value={user.email}
+                onChange={handleInputChange}
+                onBlur={() => checkEmailRole(user.email)}
+              />
+            </div>
+            <div className={styles.formField}>
+              <label htmlFor="signupPhone">Phone</label>
+              <input
+                name="phone"
+                id="signupPhone"
+                type="text"
+                value={user.phone}
+                onChange={handleInputChange}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className={styles.formField}>
+              <label htmlFor="signupPassword">Password</label>
+              <input
+                name="password"
+                id="signupPassword"
                 type="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className={styles.input}
+                value={user.password}
+                onChange={handleInputChange}
               />
-              <button
-                onClick={role === "admin" ? loginAdmin : loginTherapist}
-                className={styles.button}
-              >
-                Login as {role}
-              </button>
-            </>
-          )}
-
-          {(!role || role === "user") && (
-            <>
+            </div>
+            <div className={styles.formField}>
+              <label htmlFor="confirmPassword">Confirm Password</label>
               <input
-                type="text"
-                placeholder="Phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className={styles.input}
+                name="confirmPassword"
+                id="confirmPassword"
+                type="password"
+                value={user.confirmPassword}
+                onChange={handleInputChange}
               />
+            </div>
+            <div className={styles.formField}>
+              <label htmlFor="signupOTP">OTP</label>
               <input
+                name="otp"
+                id="signupOTP"
                 type="text"
-                placeholder="OTP"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                className={styles.input}
+                value={user.otp}
+                onChange={handleInputChange}
               />
-              <button onClick={loginUserByOTP} className={styles.button}>
-                Login with OTP
-              </button>
-              <button
-                onClick={sendOTP}
-                className={`${styles.button} ${styles.buttonSecondary}`}
-              >
-                Send OTP
-              </button>
-            </>
-          )}
+            </div>
+          </>
+        )}
 
-          {!email && (
-            <button
-              onClick={setMail}
-              className={`${styles.button} ${styles.buttonDanger}`}
-            >
-              Set Temp Mail for Test
-            </button>
-          )}
-        </form>
-      )}
+        <div className={styles.termsSection}>
+          <div className={styles.termsCheckboxWrapper}>
+            <input
+              id="signupTerms"
+              type="checkbox"
+              name="tAndC"
+              checked={user.tAndC}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="signupTerms">
+              I agree to the Terms of Services
+            </label>
+          </div>
+          <a href="#">Create an account as a therapist?</a>
+        </div>
+
+        {error && <p className={styles.error}>{error}</p>}
+
+        {step === 1 ? (
+          <button
+            type="button"
+            disabled={loading}
+            onClick={sendOTP}
+            className={styles.formNextButton}>
+            {!loading ? "Next" : "Sending otp..."}
+          </button>
+        ) : (
+          <button
+            disabled={loading || !user.tAndC}
+            onClick={handleSubmit}
+            type="submit"
+            className={styles.formNextButton}>
+            {loading ? "Signing up..." : "Sign Up"}
+          </button>
+        )}
+      </form>
     </div>
   );
 };
