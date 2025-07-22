@@ -14,6 +14,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import './App.css'
+import SignUp from "./pages/SignUp";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -32,7 +33,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
         <Route path="*" element={<p>404 Not Found</p>} />
       </Routes>
     </BrowserRouter>

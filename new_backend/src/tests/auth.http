@@ -1,0 +1,44 @@
+### Register User
+POST http://localhost:3005/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "testuser@example.com",
+  "phone": "9876543210",
+  "password": "password123",
+  "role": "patient"
+}
+
+###
+
+### Login User
+POST http://localhost:3005/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+
+###
+
+### Send OTP
+POST http://localhost:3005/api/auth/send-otp
+Content-Type: application/json
+
+{
+  "phone": "9876543210"
+}
+
+###
+
+### Verify OTP (wrong code to test failure)
+POST http://localhost:3005/api/auth/verify-otp
+Content-Type: application/json
+
+{
+  "phone": "9876543210",
+  "code": "123456"
+}
+
