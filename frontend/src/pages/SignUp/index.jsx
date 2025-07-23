@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import styles from "./index.module.css";
 import { url } from "../../config/settings";
+import { useCallback } from "react";
+import api from "../../config/api";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [otpSent, setOtpSent] = useState(false);
@@ -14,14 +17,15 @@ const SignUp = () => {
     confirmPassword: "12345",
     tAndC: false,
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState("");
   const [error, setError] = useState("");
   const [step, setStep] = useState(1);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) loginByToken(token);
-  }, []);
+  // useEffect(() => {
+  //   const token = Cookies.get("token");
+  //   if (token) loginByToken(token);
+  // }, []);
 
   const loginByToken = async (token) => {
     try {
@@ -57,6 +61,7 @@ const SignUp = () => {
 
       alert("📩 OTP sent successfully");
       setOtpSent(true);
+      setUser((p) => ({ ...p, otp: data?.data?.otp }));
       setStep(2);
       setError("");
     } catch (err) {
@@ -74,6 +79,37 @@ const SignUp = () => {
     }));
   };
 
+  const createAccount = useCallback(async (data) => {
+    try {
+      setError("");
+      setLoading("Creating Account");
+      try {
+        const res = await api.post("/api/auth/register", data);
+        console.log(res?.data?.data?.token);
+        let token = res?.data?.data?.token;
+
+        if (res.status === 201 || res.status === 200) {
+          // Successfully registered
+          Cookies.set("token", token, {
+            expires: 2,
+          });
+          navigate("/login");
+        } else if (res.status === 409) {
+          // User already exists
+          navigate("/login");
+        }
+      } catch (err) {
+        console.log("Registration failed:", err);
+        setError(err.message);
+        // Optional: Show error to user
+      }
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading("");
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     console.log(user);
     e.preventDefault();
@@ -81,6 +117,15 @@ const SignUp = () => {
     if (!user.tAndC) {
       setError("Please agree to Terms and Conditions.");
       return;
+    }
+
+    if (user?.role === "therapist") {
+      if (!user.password) {
+        return alert("Enter password");
+      } else if (user.password !== user.confirmPassword) {
+        setError("Passwords do not match.");
+        return;
+      }
     }
 
     if (user.password !== user.confirmPassword) {
@@ -98,18 +143,22 @@ const SignUp = () => {
           email: user.email,
           password: user.password,
           confirmPassword: user.confirmPassword,
+          role: user.role,
         }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "OTP verification failed");
 
-      Cookies.set("token", data.token);
-      console.log(data)
-      setError("");
+      // Cookies.set("token", data.token);
+      console.log(data);
+      setUser((p) => ({ ...p, otp: data.otp }));
+
+      await createAccount(user);
+      console.log("Creation crossed");
     } catch (err) {
       setError(err.message);
     } finally {
-      setLoading(false);
+      setLoading("");
     }
   };
 
